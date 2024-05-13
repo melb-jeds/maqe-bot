@@ -16,15 +16,15 @@ export default class Bot {
 		this.currentDirectionIndex = this.directions.findIndex((item) => item === direction)
 	}
 
-	public getCurrentDirection(): Direction {
+	public getDirection(): Direction {
 		return this.directions[this.currentDirectionIndex]
 	}
 
-	public getCurrentPosition(): { x: number; y: number } {
+	public getPosition(): { x: number; y: number } {
 		return this.currentPosition
 	}
 
-	public turnRigth(): void {
+	public turnRight(): void {
 		const isLastItem = this.currentDirectionIndex === this.directions.length - 1
 
 		if (isLastItem) this.currentDirectionIndex = 0
