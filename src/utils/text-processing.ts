@@ -1,4 +1,4 @@
-type CommandType = { command: 'R' | 'L' } | { command: 'W'; count: number }
+export type CommandType = { command: 'R' | 'L' } | { command: 'W'; count: number }
 
 export const splitCommands = (commands: string): CommandType[] => {
 	const regex = /([LR])|W(\d+)/g
