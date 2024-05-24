@@ -24,11 +24,11 @@ export default class Bot {
 		return this.currentPosition
 	}
 
-	turnLeft(moveCount: number = 1) {
+	public turnLeft(moveCount: number = 1) {
 		this.currentDirectionIndex = (this.currentDirectionIndex - moveCount + this.directions.length) % this.directions.length
 	}
 
-	turnRight(moveCount: number = 1) {
+	public turnRight(moveCount: number = 1) {
 		this.currentDirectionIndex = (this.currentDirectionIndex + moveCount) % this.directions.length
 	}
 
