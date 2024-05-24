@@ -24,19 +24,12 @@ export default class Bot {
 		return this.currentPosition
 	}
 
-	public turnRight(): void {
-		const isLastItem = this.currentDirectionIndex === this.directions.length - 1
-
-		if (isLastItem) this.currentDirectionIndex = 0
-		else this.currentDirectionIndex++
+	turnLeft(moveCount: number = 1) {
+		this.currentDirectionIndex = (this.currentDirectionIndex - moveCount + this.directions.length) % this.directions.length
 	}
 
-	public turnLeft(): void {
-		const isFirstItem = this.currentDirectionIndex === 0
-		const lastIndex = this.directions.length - 1
-
-		if (isFirstItem) this.currentDirectionIndex = lastIndex
-		else this.currentDirectionIndex--
+	turnRight(moveCount: number = 1) {
+		this.currentDirectionIndex = (this.currentDirectionIndex + moveCount) % this.directions.length
 	}
 
 	public moveForward(moveCount: number = 1): void {
@@ -46,6 +39,15 @@ export default class Bot {
 		const { axis, factor } = this.getIndicator(currentDirection)
 
 		this.currentPosition[axis] += factor * moveCount
+	}
+
+	public moveBackward(moveCount: number = 1): void {
+		if (moveCount < 1) throw NoLessThanOneMoveException()
+
+		const currentDirection = this.directions[this.currentDirectionIndex]
+		const { axis, factor } = this.getIndicator(currentDirection)
+
+		this.currentPosition[axis] -= factor * moveCount
 	}
 
 	private getIndicator(direction: Direction): Indicator {

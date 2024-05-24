@@ -35,9 +35,7 @@ describe('Bot', () => {
 		})
 		it('with multiple rigth turns', () => {
 			const bot = new Bot()
-			bot.turnRight()
-			bot.turnRight()
-			bot.turnRight()
+			bot.turnRight(3)
 
 			expect(bot.getDirection()).toBe('West')
 		})
@@ -49,18 +47,14 @@ describe('Bot', () => {
 		})
 		it('with multiple left turns', () => {
 			const bot = new Bot()
-			bot.turnLeft()
-			bot.turnLeft()
-			bot.turnLeft()
+			bot.turnLeft(3)
 
 			expect(bot.getDirection()).toBe('East')
 		})
 		it('with mixed turns', () => {
 			const bot = new Bot()
-			bot.turnRight()
-			bot.turnRight()
-			bot.turnLeft()
-			bot.turnLeft()
+			bot.turnRight(2)
+			bot.turnLeft(2)
 
 			expect(bot.getDirection()).toBe('North')
 		})
@@ -158,6 +152,44 @@ describe('Bot', () => {
 			expect(bot.getPosition()).toEqual({
 				x: 5,
 				y: 15,
+			})
+		})
+	})
+
+	describe('is moving backward with correct direction', () => {
+		it('single left turn and 20 backward moves', () => {
+			const bot = new Bot()
+			bot.turnLeft()
+			bot.moveBackward(20)
+
+			expect(bot.getDirection()).toBe('West')
+			expect(bot.getPosition()).toEqual({
+				x: 20,
+				y: 0,
+			})
+		})
+		it('multiple left turns and 100 backward moves', () => {
+			const bot = new Bot()
+			bot.turnLeft()
+			bot.turnLeft()
+			bot.turnLeft()
+			bot.moveBackward(100)
+
+			expect(bot.getDirection()).toBe('East')
+			expect(bot.getPosition()).toEqual({
+				x: -100,
+				y: 0,
+			})
+		})
+		it('single right turn and 20 backward moves', () => {
+			const bot = new Bot()
+			bot.turnRight()
+			bot.moveBackward(20)
+
+			expect(bot.getDirection()).toBe('East')
+			expect(bot.getPosition()).toEqual({
+				x: -20,
+				y: 0,
 			})
 		})
 	})

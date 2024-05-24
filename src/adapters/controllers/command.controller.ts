@@ -17,13 +17,16 @@ export default class CommandController {
 	private runBotWithCommand(command: CommandType): void {
 		switch (command.command) {
 			case 'L':
-				this.bot.turnLeft()
+				this.bot.turnLeft(command.count)
 				break
 			case 'R':
-				this.bot.turnRight()
+				this.bot.turnRight(command.count)
 				break
 			case 'W':
 				this.bot.moveForward(command.count)
+				break
+			case 'B':
+				this.bot.moveBackward(command.count)
 				break
 			default:
 				break

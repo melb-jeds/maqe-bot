@@ -4,11 +4,11 @@ describe('splitCommands', () => {
 	it('should split commands correctly', () => {
 		const commands = 'LW10RW5LW2'
 		const expectedResult: CommandType[] = [
-			{ command: 'L' },
+			{ command: 'L', count: 1 },
 			{ command: 'W', count: 10 },
-			{ command: 'R' },
+			{ command: 'R', count: 1 },
 			{ command: 'W', count: 5 },
-			{ command: 'L' },
+			{ command: 'L', count: 1 },
 			{ command: 'W', count: 2 },
 		]
 
@@ -18,8 +18,14 @@ describe('splitCommands', () => {
 	})
 
 	it('should handle single-character commands', () => {
-		const commands = 'LRLRL'
-		const expectedResult: CommandType[] = [{ command: 'L' }, { command: 'R' }, { command: 'L' }, { command: 'R' }, { command: 'L' }]
+		const commands = 'LRLRL2'
+		const expectedResult: CommandType[] = [
+			{ command: 'L', count: 1 },
+			{ command: 'R', count: 1 },
+			{ command: 'L', count: 1 },
+			{ command: 'R', count: 1 },
+			{ command: 'L', count: 2 },
+		]
 
 		const result = splitCommands(commands)
 
